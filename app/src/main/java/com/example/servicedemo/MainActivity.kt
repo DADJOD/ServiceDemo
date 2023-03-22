@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
 //        val myIntent = Intent(this@MainActivity, MyService::class.java)
         data = input.text.toString().toInt()
 
-        val myIntent = MyService.getIntent(this, data)
+//        val myIntent = MyService.getIntent(this, data)
+        val myIntent = CalculatorService.getIntent(this, data)
 
 //        myIntent.putExtra(MyService.SERVICE_DATA_EXTRA, data)
         startService(myIntent)

@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <service android:name="com.example.servicedemo.MyService" />
+        <service android:name="com.example.servicedemo.CalculatorService" />
     </application>
 
 </manifest>

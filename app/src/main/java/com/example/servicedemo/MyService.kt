@@ -4,9 +4,12 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
 
-class MyService : Service(){
+// !!! Service works in UIThread !!!
+// !!! AsyncTask create and works in WorkerThread !!!
+
+@Suppress("DEPRECATION")
+class MyService : Service() {
 
 //    fun getIntent(context: Context, num: Int): Intent {
 //        val intent2 = Intent(context, MyService::class.java)
@@ -14,17 +17,27 @@ class MyService : Service(){
 //        return intent2
 //    }
 
+    private lateinit var task: CalculateTask
+
     override fun onBind(intent: Intent?): IBinder? {
         TODO("Not yet implemented")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent != null && intent.hasExtra(SERVICE_DATA_EXTRA)) {
-            var num = intent.getIntExtra(SERVICE_DATA_EXTRA, 0)
+            val num = intent.getIntExtra(SERVICE_DATA_EXTRA, 0)
             // gonna square it
-            num *= num
+//            task = CalculateTask()
+//            task.calculateTaskNum(num)
+//            task.execute()
 
-            Log.d("happySDK", num.toString())
+//            num *= num
+//            Log.d("happySDK SERVICE", num.toString())
+
+            // create AsyncTask for work in WorkerThread
+            task = CalculateTask()
+            task.calculateTaskNum(num)
+            task.execute()
         }
 
         return START_NOT_STICKY
