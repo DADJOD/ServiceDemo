@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ServiceDemo</string>
+    <string name="press_me">Press me</string>
+    <string name="edit_me">Edit me</string>
+</resources>
