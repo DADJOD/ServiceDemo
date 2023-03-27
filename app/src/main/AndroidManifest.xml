@@ -20,8 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name="com.example.servicedemo.MyService" />
         <service android:name="com.example.servicedemo.CalculatorService" />
+
+        <receiver android:name="com.example.servicedemo.MainActivity$MyReceiver" />
     </application>
 
 </manifest>

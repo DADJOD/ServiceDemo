@@ -7,10 +7,12 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 
+
 class CalculatorService : IntentService("CalculatorService") {
 
     companion object {
-        private const val CALC_SERVICE_DATA_EXTRA = "extra"
+        const val CALC_SERVICE_DATA_EXTRA = "extra"
+        const val MY_COOL_SQUARE_ACTION = "my.cool.square.action"
 
         fun getIntent(context: Context, num: Int): Intent {
             val intent2 = Intent(context, CalculatorService::class.java)
@@ -30,7 +32,14 @@ class CalculatorService : IntentService("CalculatorService") {
         try {
             if (intent != null && intent.hasExtra(CALC_SERVICE_DATA_EXTRA)) {
                 val num = intent.getIntExtra(CALC_SERVICE_DATA_EXTRA, 0)
-                Log.d("happySDK", "square ${num * num}")
+                val square = num * num
+//                Log.d("happySDK", "square ${num * num}")
+                Log.d("happySDK", "square $square")
+
+                val intentHandle = Intent()
+                intentHandle.action = MY_COOL_SQUARE_ACTION
+                intentHandle.putExtra(CALC_SERVICE_DATA_EXTRA, square)
+                sendBroadcast(intentHandle)
             }
         } catch (e: InterruptedException) {
             e.printStackTrace()
